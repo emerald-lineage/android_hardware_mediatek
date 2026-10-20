@@ -26,6 +26,31 @@ cc_binary {
     vendor: true,
     init_rc: ["android.hardware.health-service.mediatek.rc"],
     overrides: ["charger"],
+    // Also used on prebuilt vendor images, which may lack this health NDK version and ship
+    // older copies of the other libraries: link everything that is not LLNDK into the binary.
+    stl: "c++_static",
+    target: {
+        vendor: {
+            exclude_shared_libs: [
+                "android.hardware.health-V5-ndk",
+                "libbase",
+                "libcutils",
+                "libhidlbase",
+                "libpng",
+                "libutils",
+            ],
+            static_libs: [
+                "android.hardware.health-V5-ndk",
+                "libbase",
+                "libcutils",
+                "libhidlbase",
+                "libpng",
+                "libutils",
+                // for libpng
+                "libz",
+            ],
+        },
+    },
 }
 
 cc_binary {
