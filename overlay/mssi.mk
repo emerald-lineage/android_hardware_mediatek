@@ -42,12 +42,15 @@ PRODUCT_PACKAGES += \
 endif
 endif
 
-ifneq ($(call math_gt_or_eq,$(BOARD_SHIPPING_API_LEVEL),34),)
+# emerald: BOARD_SHIPPING_API_LEVEL is still empty in the pre product config pass (the board
+# config is read later), and math_gt_or_eq() dies with "Argument missing" on an empty argument.
+# Guard the checks so the API-34+ overlays are simply skipped for such products.
+ifneq ($(if $(BOARD_SHIPPING_API_LEVEL),$(call math_gt_or_eq,$(BOARD_SHIPPING_API_LEVEL),34)),)
 PRODUCT_PACKAGES += \
     MssiWifiQoSOverlay
 endif
 
-ifneq ($(call math_gt_or_eq,$(BOARD_SHIPPING_API_LEVEL),202504),)
+ifneq ($(if $(BOARD_SHIPPING_API_LEVEL),$(call math_gt_or_eq,$(BOARD_SHIPPING_API_LEVEL),202504)),)
 PRODUCT_PACKAGES += \
     MssiWifiCountryOverlay \
     MssiWifiOweOverlay
