@@ -5,7 +5,6 @@
 
 aidl_interface {
     name: "vendor.mediatek.hardware.mtkpower",
-    system_ext_specific: true,
     vendor_available: true,
     srcs: ["vendor/mediatek/hardware/mtkpower/*.aidl"],
     stability: "vintf",

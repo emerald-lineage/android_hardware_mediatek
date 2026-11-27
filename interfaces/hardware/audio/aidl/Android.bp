@@ -5,7 +5,6 @@
 
 aidl_interface {
     name: "vendor.mediatek.hardware.audio",
-    system_ext_specific: true,
     vendor_available: true,
     srcs: ["vendor/mediatek/hardware/audio/*.aidl"],
     stability: "vintf",
