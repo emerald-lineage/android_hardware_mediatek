@@ -3,8 +3,13 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
+// emerald (свой вендор, 28.11): выключена. Это заглушка на 5 символов, а стоковые блобы (aee_aedv64_v2,
+// libpowerhal, thermal_core, …) импортируют из libaedv.so 137: aee_aedv64_v2 падал на usersmaps_info.
+// Устройство ставит стоковую libaedv из блобов 305 на тот же путь; включённый модуль дал бы kati дубль
+// правила установки (soong пишет его для каждого включённого модуля, даже вне PRODUCT_PACKAGES).
 cc_library_shared {
     name: "libaedv",
+    enabled: false,
     vendor: true,
     srcs: ["aee.c"],
 }

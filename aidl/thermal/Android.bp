@@ -1,5 +1,10 @@
+// emerald (свой вендор, 28.11): выключен. Устройство берёт стоковый thermal-HAL из блобов 305 на тот же
+// путь /vendor/bin/hw/android.hardware.thermal-service.mediatek, а правило установки soong пишет для
+// каждого включённого модуля, даже вне PRODUCT_PACKAGES, — kati упал бы на дубле. Этой сборке к тому же
+// нужен /vendor/etc/thermal_info_config.json, которого у emerald нет (LOG(FATAL) при старте).
 cc_binary {
     name: "android.hardware.thermal-service.mediatek",
+    enabled: false,
     srcs: [
         "service.cpp",
         "Thermal.cpp",
